@@ -14,11 +14,11 @@ vim.keymap.set("n", "<leader>zt", latex_templates.choose_latex_template, { desc 
 
 -- oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-vim.keymap.set("n", "<leader>qa", "<CMD>Alpha<CR>", { desc = "Torna alla schermata iniziale" })
+-- vim.keymap.set("n", "<leader>qa", "<CMD>Alpha<CR>", { desc = "Torna alla schermata iniziale" })
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<C-p>",
-  ":lua require'telescope'.extensions.project.project{}<CR>",
-  { noremap = true, silent = true }
-)
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<C-p>",
+--   ":lua require'telescope'.extensions.project.project{}<CR>",
+--   { noremap = true, silent = true }
+-- )
