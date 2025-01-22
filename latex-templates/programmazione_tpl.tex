@@ -1,0 +1,778 @@
+
+\RequirePackage{etex}
+\documentclass[12pt, a4paper]{exam}
+% \reserveinserts{256}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{mdframed}
+% \usepackage{fontspec}
+\usepackage{helvet}
+% \usepackage{enumitem}
+% \usepackage{hyperref}
+\RequirePackage{etex}
+\usepackage{tcolorbox}
+\usepackage{color,soul}
+\usepackage{transparent}
+\usepackage{nicefrac}
+%\usepackage{fancyhdr}
+%\usepackage{float}
+% \usepackage[margin=1in]{geometry}
+\usepackage[top=2cm, bottom=1.4cm, left=1.4cm, right=2.0cm, includefoot]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, mathrsfs}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fix-cm}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{setspace}
+\usepackage{dashrule}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,fit}
+\usepackage{xparse}
+\usepackage{tkz-euclide}
+\usepackage{upquote}
+\usepackage{caption}
+\usepackage{parskip}
+\usepackage{longtable}
+\usepackage{pgfplots}
+\usepackage{enumerate}
+\usepackage{fontawesome}
+% \usepackage{linegoal}
+\usepackage[font=footnotesize,labelfont=bf, format=hang]{caption}
+% \usepackage{venndiagram}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usetikzlibrary{arrows.meta,bending,positioning}
+\pgfplotsset{every x tick label/.append style={font=\footnotesize, yshift=0.6ex}, grid style={dashed}}
+\pgfplotsset{every y tick label/.append style={font=\footnotesize, xshift=0.5ex}}
+\usetikzlibrary{arrows}
+\setlength{\columnsep}{1cm}
+\tikzset{
+  arrow/.style = {-stealth[bend]},
+}
+
+\pgfplotsset{compat=1.18}
+
+
+\renewcommand{\questionshook}{%
+  \setlength{\leftmargin}{0pt}%
+}
+\renewcommand{\choiceshook}{%
+  \setlength{\leftmargin}{20pt}%
+}
+
+\checkboxchar{$\square$}
+\checkedchar{$\boxtimes$}
+\CorrectChoiceEmphasis{}  % solo per non avere bold nelle risposte corrette
+
+\renewcommand{\checkboxeshook}{
+  \setlength{\labelsep}{2.4em}
+  \setlength{\leftmargin}{4em}
+}
+
+\newcommand{\ChoiceLabel}[1]{\hspace{-1.6em}\makebox[1.6em][l]{\textbf{#1}}\ignorespaces}
+\newcommand{\WrongChoice}[1]{\choice \ChoiceLabel{#1}}
+\newcommand{\RightChoice}[1]{\correctchoice \ChoiceLabel{#1}}
+\newcommand{\Item}[1]{\hspace{-17pt}\makebox[17pt][l]{\textbf{#1.}}\ignorespaces}
+\newcommand{\midmatch}{\hspace{0.75in}\underline{\hspace{0.25in}     }}
+
+
+\setlength{\parskip}{0.6mm}
+% \pgfplotsset{compat=1.18}
+
+% ========================== colors =======================
+
+\definecolor{mygray}{gray}{0.9}
+\definecolor{maroon}{cmyk}{0,0.87,0.68,0.32}
+\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+\definecolor{cosmiclatte}{rgb}{1.0, 0.97, 0.91}
+\definecolor{eggshell}{rgb}{0.94, 0.92, 0.84}
+\definecolor{floralwhite}{rgb}{1.0, 0.98, 0.94}
+\definecolor{darksienna}{rgb}{0.24, 0.08, 0.08}
+\definecolor{darkorange}{rgb}{1.0, 0.55, 0.0}
+\definecolor{cinnabar}{rgb}{0.89, 0.26, 0.2}
+\definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
+\definecolor{aliceblue}{rgb}{0.94, 0.97, 1.0}
+\definecolor{burlywood}{rgb}{0.87, 0.72, 0.53}
+\definecolor{neonorange}{rgb}{255, 151, 24}
+
+
+% ========================== watermark =======================
+
+\usepackage[firstpage]{draftwatermark}
+\SetWatermarkLightness{ 0.9 }
+\SetWatermarkColor{caribbeangreen!30}
+% \SetWatermarkText{\includegraphics[width = 90mm]{welcome.png}}
+\SetWatermarkText{soluzioni}
+\SetWatermarkScale{ 1.3 }
+
+% ---------------------------------- Intestazione
+
+\newcommand{\class}{\LARGE {PROGRAMMAZIONE di MATEMATICA}}
+\newcommand{\term}{\Large {\em Classi QUARTE SE}}
+\newcommand{\examnum}{\large{anno scolastico 2023/'24}}
+\newcommand{\examtitle}{\large{prof. Diego Fantinelli}}
+\newcommand{\examdate}{28 ottobre 2022}
+\newcommand{\timelimit}{60 minuti}
+\CorrectChoiceEmphasis{\color{maroon}}
+\SolutionEmphasis{\color{maroon} \footnotesize}
+\renewcommand{\solutiontitle}{\noindent\textbf{Soluzione:}\par\noindent}
+
+\pagestyle{headandfoot}
+\firstpageheader{}{}{}
+\runningheader{\footnotesize IIS "G. A. Remondini" - Bassano del Grappa (VI)}{}{Programmazione di Matematica}
+\runningheadrule
+
+\firstpagefooter{}{}{}
+\runningfooter{}{}{pag. \thepage\ di \numpages}
+\runningfootrule
+
+% ---------------------------------- Definition of circles
+
+% \def\firstcircle{ (0.0, 0.0) circle (1.5)}
+% \def\secondcircle{(2.0, 0.0) circle (1.5)}
+% \def\thirdcircle{ (1.0,-1.5) circle (1.5)}
+% \def\rectangle{ (-1.5,-3.0) rectangle (3.5,1.0) }
+% \colorlet{circle edge}{black}
+% \colorlet{circle area}{blue!30}
+
+% \tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+%   outline/.style={draw=circle edge, thick}}
+
+% \setlength{\parskip}{1.2mm}
+
+% % =============================================== Punteggi
+
+% \pointpoints{punto}{\em punti}
+% \pointformat{[{\footnotesize \thepoints}]}
+% \bonuspointpoints{punto bonus}{\em p.ti bonus}
+% \bonuspointformat{[{\footnotesize \thepoints}]}
+% \pointsinrightmargin
+% \setlength{\rightpointsmargin}{.5cm}
+% \chqword{Esercizio}
+% \chpword{Punti}
+% \chbpword{Punti Bonus}
+% \chsword{Punteggio}
+% \chtword{Totale}
+
+\begin{document}
+
+% =============================================== Title Page ================================ 
+
+\tikz [remember picture, overlay] %
+\node [shift={(1.3cm,-0.5cm)}] at (current page.north west) %
+[anchor=north west] %
+{\includegraphics[width = 22mm]{logo_rem.jpeg}};\\[2ex]
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node[align=left, text width=14cm, anchor=north west] (texy)
+    at ($(current page.north) + (-7cm,-0.6cm)$)
+    {
+    \begin{center}
+      \footnotesize {\bf ISTITUTO D’ISTRUZIONE SUPERIORE “G. A. REMONDINI”}\\ TECNICO PER IL TURISMO, LE BIOTECNOLOGIE SANITARIE E LA LOGISTICA PROFESSIONALE PER I SERVIZI COMMERCIALI, SERVIZI PER LA SANITÀ E L’ASSISTENZA SOCIALE,
+      SERVIZI PER L'ENOGASTRONOMIA\\
+      Via Travettore, 33 - 36061 Bassano del Grappa (VI)\\ tel: 0424.523592 - Fax : 0424.220037 -  VIIS01700L@istruzione.it
+    \end{center}
+    };
+\end{tikzpicture}
+% \rule[2ex]{\textwidth}{0.5pt}\\
+\tikz [remember picture, overlay] %
+\node [shift={(17.5cm,-0.5cm)}] at (current page.north west) %
+[anchor=north west] %
+{\includegraphics[width = 18mm]{logo_italy.png}};\\[2ex]
+
+\begin{center}
+\vfill
+\rule[2ex]{\textwidth}{0.5pt}
+{\bf \class}\\[20pt]
+{\bf \term }\\[30pt]
+
+\begin{multicols}{2}
+{\em \large{\examtitle}}\\
+{\em \large{\examnum}}
+\end{multicols}
+
+\rule[2ex]{\textwidth}{0.5pt}\\
+\end{center}
+
+% \vspace{1.5cm}
+% \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+% \textbf{} & \textbf{COGNOME e Nome:} & \makebox[2.5in]{\hrulefill}\\
+% \textbf{} &&\\
+% \textbf{} & \textbf{Classe:} & \makebox[2.5in]{\Large{\bf 3 \string^ QES}}\\
+% \textbf{} &&\\
+% \textbf{} & data: & \makebox[2.5in]{\examdate}\\
+% \textbf{} &&\\
+
+% \textbf{} & Tempo a disposizione: & \makebox[2.5in]{\timelimit}\\
+% \textbf{} &&\\
+% \textbf{} &&\\
+% \textbf{} &&\\
+% % \textbf{} & {\em prof.:} & \makebox[2.5in]{\em Diego Fantinelli}\\
+
+% % \textbf{} &&\\
+% % \textbf{} &&\\
+% \textbf{} &&\\
+% \textbf{} & {\em voto finale:} & \makebox[2.5in]{\fillin}\\[20pt]
+
+% \end{tabular*}\\
+
+% \noindent
+% $\star$ {\em eventuali osservazioni e/o considerazioni del docente}:
+% \vspace{0pt}
+% \fillwithdottedlines{0.5in}
+
+\vfill
+
+
+% =============================================== Avvertenze =================================
+
+% \small{\textbf{Istruzioni e avvertenze:}}
+% \small{
+% \SetSinglespace{1ex}{
+% \begin{itemize}
+% \item La presente verifica, somministrata in modalità {\em in presenza}, contiene \numquestions \, quesiti, per un totale di \numpoints \, punti, più $2$ punti bonus; l'esercizio facoltativo che verrà conteggiato ove siano già stati risolti tutti i precedenti.
+% % \item Per la parte riguardante il TEST:
+% % \begin{itemize}
+% %     \item Le risposte vanno accuratamente riportate nella {\bf Tabella delle Risposte} allegata;
+% %     \item Ogni risposta esatta vale $2$ punti;
+% %     \item Le risposte che richiedono una giustificazione valgono $2$ punto soltanto se corrette e complete;
+% %     \item Ogni risposta errata o non data vale $0$ punti;
+% %     \item Per modificare una risposta è sufficiente cerchiare quella errata e segnare nuovamente quella corretta.
+% % \end{itemize}
+% \item {\bf La sufficienza è fissata a $14$ punti}
+
+% \item Il voto verrà riportato in capo alla presente verifica, e sarà oggetto di un confronto costruttivo con lo studente.
+% \item Eventuali copiature palesi comporteranno l'annullamento della prova e un voto pari a 3, a prescindere dal punteggio totalizzato.
+% % \item La sufficienza è fissata a $30$ punti, ma potrebbe subire delle modifiche in fase di correzione al fine di garantire la validità della prova anche in caso di prestazioni lontane dalla media-classe auspicata.
+% \item È vietato l'utilizzo di calcolatrici scientifiche, smartphone, tablet e altri dispositivi digitali, così come l'accesso a internet, nonché la consultazione di testi, appunti e/o siti web, ove non preventivamente autorizzato.
+% \end{itemize}
+% }
+% }
+
+% \printanswers
+
+
+% % ============================== ESERCIZI ==============================
+
+\newpage
+% \vspace{5pt}
+
+% % ============================== Esercizi
+
+
+\section*{\LARGE{Programmazione Classi Quarte SE}}
+\vspace{2em}
+
+\hrule
+\bigskip
+\subsection*{TEMA 0 - RIPASSO}
+
+\begin{quote}
+\textbf{periodo}: settembre
+\end{quote}
+
+
+\subsubsection*{conoscenze}
+
+\begin{itemize}
+
+\item
+  Disequazioni numeriche intere di primo grado.
+\end{itemize}
+
+
+\subsubsection*{abilità}
+
+\begin{itemize}
+
+\item
+  Risolvere disequazioni di primo grado e verificare la correttezza dei
+  procedimenti utilizzati.
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\subsection*{TEMA 1 - EQUAZIONI DI PRIMO GRADO FRATTE}
+
+\begin{quote}
+\textbf{periodo}: ottobre-novembre \textbf{competenza}: A1, A2
+\end{quote}
+
+
+\subsubsection*{conoscenze}
+
+\begin{itemize}
+\item
+  Frazioni algebriche: semplificazioni e operazioni con le frazioni
+  algebriche (moltiplicazione e divisione)
+\item
+  Equazioni numeriche di primo grado fratte.
+\item
+  Tecniche risolutive di un problema, anche utilizzando equazioni di
+  primo grado.
+\end{itemize}
+
+
+\subsubsection*{abilità}
+
+\begin{itemize}
+\item
+  Risolvere espressioni con le frazioni algebriche.
+\item
+  Risolvere equazioni di primo grado e verificare la correttezza dei
+  procedimenti utilizzati.
+\item
+  Utilizzo dell'algebra per risolvere problemi numerici.
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\subsection*{Tema 2 - RADICALI, EQUAZIONI DI 2° GRADO}
+
+\begin{quote}
+\textbf{periodo}: novembre-dicembre
+
+\textbf{competenze}: A1, A2
+\end{quote}
+
+
+\subsubsection*{conoscenze}
+
+\begin{itemize}
+\item
+  Definizione di radicale e le sue condizioni di esistenza
+\item
+  La proprietà invariantiva
+\item
+  Operazioni con i radicali
+\item
+  Regole risolutive delle equazioni di secondo grado, complete e
+  incomplete.
+\item
+  Significato e discussione del discriminante di un'equazione di 2°
+  grado.
+\item
+  Equazioni di secondo grado intere e fratte.
+\end{itemize}
+
+\
+\subsubsection*{abilità}
+
+\begin{itemize}
+\item
+  Semplificare espressioni utilizzando le operazioni con i radicali.
+\item
+  Risolvere equazioni di secondo grado numeriche intere e fratte e
+  verificare la correttezza dei procedimenti utilizzati.
+\item
+  Risolvere semplici problemi di secondo grado
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\subsection*{Tema 3 - GEOMETRIA ANALITICA: RETTA}
+
+\begin{quote}
+\textbf{periodo}: gennaio-febbraio \textbf{competenze}: B1, B2
+\end{quote}
+
+
+\subsubsection*{conoscenze}
+
+\begin{itemize}
+\item
+  Il \textbf{piano cartesiano}: distanza tra due punti, punto medio di
+  un segmento.
+\item
+  La retta nel piano cartesiano: retta passante per l'origine, retta in
+  posizione generica, significato geometrico del coefficiente angolare e
+  di ordinata all'origine, rette parallele e perpendicolari,
+  intersezione tra rette, equazione di retta passante per due punti.
+\end{itemize}
+
+
+\subsubsection*{abilità}
+
+\begin{itemize}
+\item
+  Saper rappresentare nel piano cartesiano una retta nota la sua
+  equazione e determinare l'equazione di una retta note alcune
+  condizioni.
+\item
+  Problemi di scelta tra più alternative (solo a livello di
+  esercitazione)
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\subsection*{Tema 4 - SISTEMI DI EQUAZIONI e PROBLEMI}
+
+\begin{quote}
+\textbf{periodo}: marzo-aprile \textbf{competenze}: A1, A2
+\end{quote}
+
+
+\subsubsection*{conoscenze}
+
+\begin{itemize}
+\item
+  Sistemi di equazioni di primo grado.
+\item
+  Interpretazione geometrica dei sistemi di equazioni.
+\item
+  Conoscere le regole per risolvere un problema con equazioni o sistemi
+  di primo grado.
+\end{itemize}
+
+
+\subsubsection*{abilità}
+
+\begin{itemize}
+\item
+  Saper risolvere un sistema di primo grado con diversi metodi:
+  sostituzione, addizione e sottrazione, metodo grafico.
+\item
+  Risolvere problemi che implicano l'uso di funzioni, di equazioni e di
+  sistemi di equazioni anche per via grafica, collegati con altre
+  discipline e situazioni di vita ordinaria, come primo passo verso la
+  modellizzazione matematica.
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\subsection*{Tema 5 - GEOMETRIA ANALITICA: LA PARABOLA}
+
+\begin{quote}
+\textbf{periodo}: febbraio-marzo \textbf{competenze}: B1, B2
+\end{quote}
+
+
+\subsubsection*{conoscenze}
+
+\begin{itemize}
+\item
+  La parabola nel piano cartesiano: parabola con asse di simmetria
+  parallelo all'asse y, studio dell'equazione \[y=ax^2+bx+c\] con casi
+  particolari, formule del vertice e dell'asse di simmetria.
+\item
+  Disegnare il grafico della parabola dopo aver determinato:
+
+  \begin{itemize}
+  \item
+    vertice,
+  \item
+    asse di simmetria,
+  \item
+    intersezioni con gli assi.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection*{abilità}
+
+\begin{itemize}
+\item
+  Stabilire algebricamente e graficamente posizione retta-parabola.
+\item
+  Saper rappresentare graficamente nel piano cartesiano la parabola nota
+  l'equazione.
+\item
+  Saper determinare le intersezioni tra retta e parabola.
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\subsection*{Tema 6 - DISEQUAZIONI DI II GRADO}
+
+\begin{quote}
+\textbf{periodo}: maggio-giugno \textbf{competenze}: B2
+\end{quote}
+
+\subsubsection*{conoscenze}
+
+\begin{itemize}
+\item
+  Disequazioni di 2°grado intere e fratte (risoluzione grafica).
+\item
+  Sistemi di disequazioni di secondo grado
+\end{itemize}
+
+
+\subsubsection*{abilità}
+
+\begin{itemize}
+\item
+  Acquisire le tecniche per la risoluzione grafica di disequazioni di 2°
+  grado.
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\subsection*{Obiettivo finale - Competenze}
+
+\begin{itemize}
+  \item Saper utilizzare le tecniche di calcolo per risolvere le equazioni di 1° grado fratte,  quelle di 2° grado e i sistemi di equazioni lineari.
+  \item Saper risolvere problemi di geometria analitica sulla retta.
+  \item Saper risolvere problemi di geometria analitica sulla  parabola.
+  \item Saper risolvere disequazioni di 1° e 2°  facendo uso della retta e della parabola.
+\end{itemize}
+% \begin{questions}
+% % ------------------------------ Esercizio 1
+% \addpoints
+
+% \question
+% Determina il valore numerico delle seguenti espressioni in \( \mathbb{N} \):\\
+
+% \begin{parts}
+
+% \part[4]
+
+% \( \left\{\left[\left(15^5: 5^5\right)^2: 3^8\right]^5: 3^7-5^2\right\}^{11}:\left[\left(2^4 \cdot 2^6\right)^3:\left(2^{22} \cdot 2^0\right)\right] \)
+
+% \fillwithdottedlines{0.25in}
+
+
+% \begin{solution}
+% \( [ 8 ] \)	
+% \end{solution}
+
+% \vspace{20pt}
+
+% \part[4]
+
+% \( \left[\left(3^2 \cdot 2^2\right)^5: 6^8\right]-\left\{\left[\left(16^3\right)^2:\left(2^5\right)^4\right] \cdot 2^9\right\}: 4^5-\left(2^4 \cdot 5^2\right)^0 \)
+
+% \fillwithdottedlines{0.25in}
+
+% \begin{solution}
+% \( [ 27 ] \)	
+% \end{solution}
+
+% \end{parts}
+
+% \vspace{10pt}
+% \rule[.1ex]{\textwidth}{0.2pt}
+
+% % ------------------------------ Esercizio 2
+
+% \addpoints
+
+% \question[6] determina \(\textbf{M.C.D.} \) e \(\textbf{m.c.m.} \) dei seguenti gruppi di numeri, dopo averli opportunamente scomposti in fattori:
+% \begin{multicols}{2}
+
+% \begin{parts}
+
+% \part
+%   \( 81, \; 54 , \; 72 \);
+% \fillwithdottedlines{0.25in}
+
+% \begin{solution}
+%   \( [\text{M.C.D.} = 3^2 \quad \text{m.c.m.} = 2^3 \cdot 3^4]\)
+% \end{solution}
+
+% \part
+%   \( 63, \; 90, \; 30 \);
+% \fillwithdottedlines{0.25in}
+
+% \begin{solution}
+%   \( [\text{M.C.D.} = 3 \quad \text{m.c.m.} = 2 \cdot 3^2 \cdot 5 \cdot 7]\)
+% \end{solution}
+
+% \end{parts}
+% \end{multicols}
+
+% \vspace{10pt}
+% \rule[.1ex]{\textwidth}{0.2pt}
+
+
+% % ------------------------------ Esercizio 3 
+
+% \addpoints
+
+% \question[6] il valore delle seguenti potenze di potenze, facendo particolare attenzione alle regole dei segni:
+% \begin{multicols}{2}
+
+% \begin{parts}
+
+% \part
+%   \( - \biggl\{- \left[ - \left(-1\right)^{3}\right]^{3} \biggr \}^{3} \)
+% \fillwithdottedlines{0.25in}
+
+% \begin{solution}
+%   \( [+ 1]\)
+% \end{solution}
+
+% \part
+%   \( - \biggl\{ \left[ - 1^{2}\right]^{3} \biggr \}^{3} \)
+
+% \fillwithdottedlines{0.25in}
+
+% \begin{solution}
+%   \( [+ 1]\)
+% \end{solution}
+
+% \end{parts}
+% \end{multicols}
+
+% \vspace{20pt}
+% \rule[.1ex]{\textwidth}{0.2pt}
+
+% % ------------------------------ Esercizio 4
+% % * modificare l'esercizio: numeri Interi
+
+% \addpoints
+% \question[6] Determina il valore numerico delle seguente espressione in \( \mathbb{Z} \):\\
+
+% % \begin{parts}
+% % \part[4]
+
+% \( \left[(-3) \cdot(-5)+(-2)^5:(-2)^2\right] \cdot 3^2+\left(3^3 \cdot 2^2\right)+\left[(-7)^2:(-7) \cdot 3^2\right] \)
+
+% \fillwithdottedlines{0.25in}
+
+% \begin{solution}
+%   \( \begin{aligned}
+%     &{\left[(-3) \cdot(-5)+(-2)^5:(-2)^2\right] \cdot 3^2+\left(3^3 \cdot 2^2\right)+\left[(-7)^2:(-7) \cdot 3^2\right]=} \\
+%     &=\left[+15+(-2)^{5-2}\right] \cdot 9+(27 \cdot 4)+\left[(-7)^{2-1} \cdot 9\right]= \\
+%     &=\left[+15+(-2)^3\right] \cdot 9+108+\left[(-7)^1 \cdot 9\right]= \\
+%     &=[+15+(-8)] \cdot 9+108+[-56]= \\
+%     &=[15-8] \cdot 9+108+[-56]= \\
+%     &=7 \cdot 9+108-56= \\
+%     &=56+108-56= \\
+%     &=164-56=108
+%     \end{aligned} \)
+% \end{solution}
+
+% \vspace{10pt}
+
+% \vfill
+% % %\newpage
+% % \vspace{30pt}
+% \rule[.1ex]{\textwidth}{0.2pt}
+
+% % --------------------------------- Esercizio 6 - facoltativo
+% \addpoints
+% \bonusquestion[2] {\em Esercizio facoltativo:} Determina il valore numerico delle seguente espressione in \( \mathbb{Z} \):\\
+
+% \( -(-2)^6:(-2)^4+(-6)^2:(-3)^2+\left[(+2)^3 \cdot(-2)^3\right]: 2^3 \)
+
+% \fillwithdottedlines{0.25in}
+
+% \begin{solution}
+%   \(
+%     \begin{aligned}
+%       &-(-2)^6:(-2)^4+(-6)^2:(-3)^2+\left[(+2)^3 \cdot(-2)^3\right]: 2^3= \\
+%       &=-(-2)^{6-4}+(-6:(-3))^2+[8 \cdot(-8)]: 8= \\
+%       &=-(-2)^2+(+2)^2+[-64]: 8= \\
+%       &-2+4+(-8)= \\
+%       &=2-8=-6
+%     \end{aligned} \)	
+% \end{solution}
+
+% \end{questions}
+
+% % \vfill
+% \newpage
+% % \rule[.2ex]{\textwidth}{0.2pt}
+% \hrule width \hsize \kern 1mm \hrule width \hsize height 2pt
+
+% % ================================ Tabella Punteggi
+% % todo: rivedere punteggio
+
+% \begin{multicols}{2}
+
+% \subsection*{Tabella dei punteggi}
+% \vspace{5pt}
+% \begin{center}
+
+% \combinedgradetable[v][questions]
+% \end{center}
+% \vspace{10pt}
+% \footnotesize{La sufficienza è fissata a $14$ punti}
+% % \vspace{40pt}
+% \vfill
+% % \columnbreak
+
+% \begin{center}
+% \subsection*{Griglia di valutazione}
+% \end{center}
+% \vspace{5pt}
+% {\color{cinnabar}
+% \begin{center}
+
+% \large{
+  
+%   \begin{tabular}{c|c}
+%   \toprule
+    
+%     \bf{punteggio} &  \bf{voto}\\[5pt]
+%     \midrule
+%     $< 8$ & $4$ \\[5pt]
+    
+%     $8$ & $4\frac{1}{2}$ \\[5pt]
+    
+%     $10$ & $5$ \\[5pt]
+    
+%     $12$ & $5\frac{1}{2}$ \\[5pt]
+    
+%     \Large{\textbf{$14$}} & \Large{\textbf{$6$}} \\[5pt]
+      
+%     $16$ & $6 \frac{1}{2}$ \\[5pt]
+    
+%     $18$ & $7$ \\[5pt]
+    
+%     $20$ & $7 \frac{1}{2}$ \\[5pt]
+    
+%     $22$ & $8$ \\[5pt]
+    
+%     $24$ & $8 \frac{1}{2}$ \\[5pt]
+    
+%     $26$ & $9$ \\[5pt]
+    
+%     $28 - \text{\em bonus}$ & $9 \frac{1}{2}$ \\[5pt]
+
+% \bottomrule
+%   \end{tabular}
+%   }
+% \end{center}
+% }
+
+% \end{multicols}
+
+
+% \newpage
+% \begin{center}
+% \begin{tikzpicture}
+% \draw[step=.3cm,burlywood,very thin] (0,0) grid (17.7,26.1);
+% \end{tikzpicture}
+% \end{center}
+
+\vfill
+
+
+% ============== firma =======================================
+
+\begin{tabular}{p{0.64\textwidth}p{0.3\textwidth}}
+    Bassano del Grappa, \today  & Diego Fantinelli \\[8pt]
+    & \hrulefill \\
+\end{tabular}
+
+\end{document}
+

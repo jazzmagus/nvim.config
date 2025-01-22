@@ -1,0 +1,552 @@
+\RequirePackage{etex}
+\documentclass[12pt, a4paper]{exam}
+% \reserveinserts{256}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{mdframed}
+% \usepackage{fontspec}
+\usepackage{helvet}
+% \usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{color,soul}
+\usepackage{transparent}
+\usepackage{nicefrac}
+%\usepackage{fancyhdr}
+%\usepackage{float}
+% \usepackage[margin=1in]{geometry}
+\usepackage[top=1.8cm, bottom=1.4cm, left=1.4cm, right=2.0cm, includefoot]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, mathrsfs}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fix-cm}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{setspace}
+\usepackage{dashrule}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,fit}
+\usepackage{xparse}
+\usepackage{tkz-euclide}
+\usepackage{upquote}
+\usepackage{caption}
+\usepackage{parskip}
+\usepackage{longtable}
+\usepackage{pgfplots}
+\usepackage{enumerate}
+\usepackage{fontawesome}
+% \usepackage{linegoal}
+\usepackage[font=footnotesize,labelfont=bf, format=hang]{caption}
+% \usepackage{venndiagram}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usetikzlibrary{arrows.meta,bending,positioning}
+\pgfplotsset{every x tick label/.append style={font=\footnotesize, yshift=0.6ex}, grid style={dashed}}
+\pgfplotsset{every y tick label/.append style={font=\footnotesize, xshift=0.5ex}}
+\usetikzlibrary{arrows}
+\setlength{\columnsep}{1cm}
+\tikzset{
+  arrow/.style = {-stealth[bend]},
+}
+
+\pgfplotsset{compat=1.18}
+
+
+\renewcommand{\questionshook}{%
+  \setlength{\leftmargin}{0pt}%
+}
+\renewcommand{\choiceshook}{%
+  \setlength{\leftmargin}{20pt}%
+}
+
+\checkboxchar{$\square$}
+\checkedchar{$\boxtimes$}
+\CorrectChoiceEmphasis{}  % solo per non avere bold nelle risposte corrette
+
+\renewcommand{\checkboxeshook}{
+  \setlength{\labelsep}{2.8em}
+  \setlength{\leftmargin}{4em}
+}
+
+\newcommand{\ChoiceLabel}[1]{\hspace{-1.6em}\makebox[1.6em][l]{\textbf{#1}}\ignorespaces}
+\newcommand{\WrongChoice}[1]{\choice \ChoiceLabel{#1}}
+\newcommand{\RightChoice}[1]{\correctchoice \ChoiceLabel{#1}}
+\newcommand{\Item}[1]{\hspace{-17pt}\makebox[17pt][l]{\textbf{#1.}}\ignorespaces}
+\newcommand{\midmatch}{\hspace{0.75in}\underline{\hspace{0.25in}     }}
+
+
+\setlength{\parskip}{0.6mm}
+% \pgfplotsset{compat=1.18}
+
+% ========================== colors =======================
+
+\definecolor{mygray}{gray}{0.9}
+\definecolor{maroon}{cmyk}{0,0.87,0.68,0.32}
+\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+\definecolor{cosmiclatte}{rgb}{1.0, 0.97, 0.91}
+\definecolor{eggshell}{rgb}{0.94, 0.92, 0.84}
+\definecolor{floralwhite}{rgb}{1.0, 0.98, 0.94}
+\definecolor{darksienna}{rgb}{0.24, 0.08, 0.08}
+\definecolor{darkorange}{rgb}{1.0, 0.55, 0.0}
+\definecolor{cinnabar}{rgb}{0.89, 0.26, 0.2}
+\definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
+\definecolor{aliceblue}{rgb}{0.94, 0.97, 1.0}
+\definecolor{burlywood}{rgb}{0.87, 0.72, 0.53}
+\definecolor{neonorange}{rgb}{255, 151, 24} 
+
+% ========================== watermark =======================
+
+% \usepackage[firstpage]{dr
+% \SetWatermarkLightness{ 0.9 }
+% \SetWatermarkColor{cinnabar!30}
+% \SetWatermarkText{BOZZA}
+% \SetWatermarkScale{ 1.4 }
+
+% ---------------------------------- Intestazione
+
+\newcommand{\class}{\LARGE {Verifica di Matematica - v.1.3}}
+\newcommand{\term}{\Large {\em Trigonometria}}
+% \newcommand{\recupero}{\large {\em  Valida per il recupero del debito del primo quadrimestre}}
+\newcommand{\examnum}{anno scolastico 2024/'25}
+\newcommand{\examtitle}{{prof. Diego Fantinelli}}
+\newcommand{\examdate}{22 novembre 2024}
+\newcommand{\timelimit}{100 minuti}
+\CorrectChoiceEmphasis{\color{neonorange}}
+\SolutionEmphasis{\color{maroon} \footnotesize}
+\renewcommand{\solutiontitle}{\noindent\textbf{Soluzione:}\par\noindent}
+
+\pagestyle{headandfoot}
+\firstpageheader{}{}{}
+\runningheader{\small Liceo Scientifico "J. Da Ponte" - Bassano del Grappa (VI)}{}{Classe 4 AS}
+\runningheadrule
+
+\firstpagefooter{}{}{}
+\runningfooter{\footnotesize Verifica di matematica}{\footnotesize Trigonometria e appliazioni}{\thepage\ di \numpages}
+\runningfootrule
+
+% ---------------------------------- Definition of circles
+
+\def\firstcircle{ (0.0, 0.0) circle (1.5)}
+\def\secondcircle{(2.0, 0.0) circle (1.5)}
+\def\thirdcircle{ (1.0,-1.5) circle (1.5)}
+\def\rectangle{ (-1.5,-3.0) rectangle (3.5,1.0) }
+\colorlet{circle edge}{black}
+\colorlet{circle area}{blue!30}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+outline/.style={draw=circle edge, thick}}
+
+\setlength{\parskip}{1.2mm}
+
+% =============================================== Punteggi
+
+\pointpoints{punto}{\em punti}
+\pointformat{[{\footnotesize \thepoints}]}
+\bonuspointpoints{punto bonus}{\em p.ti bonus}
+\bonuspointformat{[{\footnotesize \thepoints}]}
+\pointsinrightmargin
+\setlength{\rightpointsmargin}{1.6cm}
+\chqword{Esercizio}
+\chpword{Punti}
+\chbpword{Punti Bonus}
+\chsword{Punteggio}
+\chtword{Totale}
+
+\begin{document}
+
+% =============================================== Title Page
+
+\tikz [remember picture, overlay] %
+\node [shift={(1.2cm,-0.5cm)}] at (current page.north west) %
+[anchor=north west] %
+{\includegraphics[width = 26mm]{/Users/diegofantinelli/Documents/Logos/logo2.png}};
+\begin{tikzpicture}[remember picture, overlay]
+  \node[align=left, text width=14cm, anchor=north west] (texy)
+    at ($(current page.north) + (-7cm,-0.6cm)$)
+    {
+      \begin{center}
+        \footnotesize {\bf LICEO SCIENTIFICO STATALE "Jacopo Da Ponte"}\\  
+        Via S. Tommaso D'Aquino, 12 - 36061 Bassano del Grappa (VI)\\ tel: 0424.522280 - email: \href{mailto:VIIS01700L@istruzione.it}{VIIS01700L@istruzione.it}
+      \end{center}
+    };
+\end{tikzpicture}
+% \rule[2ex]{\textwidth}{0.5pt}\\
+\tikz [remember picture, overlay] %
+\node [shift={(17.4cm,-0.8cm)}] at (current page.north west) %
+[anchor=north west] %
+{\includegraphics[width = 18mm]{/Users/diegofantinelli/Documents/Logos/logo_italy.png}};
+
+% ================================== Title Page ================================ 
+\vfill
+\begin{center}
+  \vfill
+  \rule[2ex]{\textwidth}{0.5pt}\\
+  {\huge{\bf \class}}\\[10pt]
+  {\Large{ \term }}\\[8pt]
+  % {\Large{ \recupero }}\\[8pt]
+  % {\em \Large{Argomento: \examtitle}}\\[8pt]
+  \rule[2ex]{\textwidth}{0.5pt}\\
+\end{center}
+\vspace{20pt}
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+  \textbf{} & \textbf{COGNOME e Nome:} & \makebox[2.5in]{\hrulefill}\\
+  \textbf{} &&\\
+  \textbf{} & \textbf{Classe:} & \makebox[2.5in]{\Large{\bf 4 AS}}\\
+  \textbf{} &&\\
+  \textbf{} & Tempo a disposizione: & \makebox[2.5in]{\timelimit}\\
+  \textbf{} &&\\
+  \textbf{} & data: & \makebox[2.5in]{\examdate}\\
+  \textbf{} &&\\
+  \textbf{} &&\\
+  \textbf{} & {\em prof.:} & \makebox[2.5in]{\em Diego Fantinelli}\\
+  \textbf{} &&\\
+  \textbf{} &&\\
+  \textbf{} &&\\
+  \textbf{} & {\em voto finale:} & \makebox[2.5in]{\fillin}\\[20pt]
+\end{tabular*}\\
+\noindent
+\faCommentO {\em \hspace{2pt} eventuali osservazioni e/o considerazioni del docente}:
+\vspace{0pt}
+\fillwithlines{0.50in}
+\vfill
+
+% ========================== Avvertenze =================================
+
+\small{\textbf{Istruzioni e avvertenze:}}
+\small{
+  \SetSinglespace{1ex}{
+    \begin{itemize}
+      \item La presente verifica, somministrata in modalità {\em in presenza}, contiene \numquestions \, quesiti, per un totale di \numpoints \, punti, più un quesito bonus del valore di $2$ punti bonus nel caso in cui siano stati risolti tutti i precedenti, altrimenti varrà $1$ punto. 
+        % \item Per la parte riguardante il TEST:
+        % \begin{itemize}
+        %     \item Le risposte vanno accuratamente riportate nella {\bf Tabella delle Risposte} allegata;
+        %     \item Ogni risposta esatta vale $2$ punti;
+        %     \item Le risposte che richiedono una giustificazione valgono $2$ punto soltanto se corrette e complete;
+        %     \item Ogni risposta errata o non data vale $0$ punti;
+        %     \item Per modificare una risposta è sufficiente cerchiare quella errata e segnare nuovamente quella corretta.
+        % \end{itemize}
+      \item La sufficienza è fissata a $20$ punti
+        % \begin{itemize}
+        %   \item {\bf nota:} per il {\bf recupero del debito del primo quadrimestre} fare riferimento alla relativa griglia di valutazione: il debito sarà considerato recuperato con un punteggio pari a $12$ punti.
+        % \end{itemize}
+        % \item {\bf nota:} per il {\bf recupero del debito del primo quadrimestre} fare riferimento alla relativa griglia di valutazione
+      \item Il voto verrà riportato in capo alla presente verifica, e sarà oggetto di un confronto costruttivo con lo studente.
+      \item Eventuali copiature palesi comporteranno l'annullamento della prova e un voto pari a 3, a prescindere dal punteggio totalizzato.
+        % \item La sufficienza è fissata a $30$ punti, ma potrebbe subire delle modifiche in fase di correzione al fine di garantire la validità della prova anche in caso di prestazioni lontane dalla media-classe auspicata.
+      \item È vietato l'utilizzo di calcolatrici scientifiche, smartphone, smartwatch, tablet e altri dispositivi digitali, così come l'accesso a internet, nonché la consultazione di testi, appunti e/o siti web, ove non preventivamente autorizzato.
+    \end{itemize}
+  }
+}
+
+\newpage
+% \printanswers
+
+% ============================== Esercizi ==============================
+
+\subsection*{Trigonometria}
+\subsection*{Teoremi sui Triangoli rettangoli e loro applicazioni}
+\vspace{12pt}
+\hrule
+\vspace{10pt}
+\begin{questions}
+
+  % --------------------------------- Esercizio 1
+  \addpoints
+  \question[6]
+  Risolvi il triangolo rettangolo $ABC$ sapendo che l'angolo $\gamma = 70^{\circ}$ e che $AH$ l'altezza relativa\\ all'ipotenusa misura $12 cm$
+
+      % \fillwithdottedlines{0.5in}
+      \begin{solution}
+        L'angolo $\beta$ è ampio $90^{\circ}-70^{\circ}=20^{\circ}$.
+Possiamo ora considerare il triangolo $A C H$, rettangolo in $H$. Applicando le relazioni trigonometriche abbiamo:
+$$
+b=\dfrac{A H}{\operatorname{sen} \gamma}=\dfrac{12 \mathrm{~cm}}{\operatorname{sen} 70^{\circ}}=12,77 \mathrm{~cm} .
+$$
+
+Calcoliamo ora la misura dell'ipotenusa del triangolo $A B C$ :
+$$
+a=\dfrac{b}{\cos \gamma}=\dfrac{12,77}{\cos 70^{\circ}}=37,34 \mathrm{~cm}
+$$
+
+Possiamo calcolare la misura del cateto $c$ in vari modi, per esempio:
+$$
+c=a \cdot \cos \beta=37,34 \mathrm{~cm} \cdot \cos 20^{\circ}=35,09 \mathrm{~cm} .
+$$
+
+Il triangolo $A B C$ è così risolto.
+      \end{solution}
+      \begin{center}
+        \begin{tikzpicture}
+          % Disegna la griglia quadrettata
+      \draw[step=0.4cm, gray!30, very thin] (-10.0,-2.8) grid (7.2,2.8);
+
+          % % Disegna la circonferenza
+          % \draw[thick] (0,0) circle (3cm);
+
+        \end{tikzpicture}
+      \end{center}
+
+  \vspace{12pt}
+  % \hrule width \hsize \kern 0.5mm \hrule width \hsize height 1pt
+  \vspace{15pt}
+  \hrule
+
+  % --------------------------------- Esercizio 2 :TODO
+  \addpoints
+  \question[8]
+  Determina il valore della lunghezza della corda $\overline{\text{AB}}$ sapendo che l'angolo al centro vale $\alpha = 120^{\circ}$\\ e il raggio della circonferenza $R = 4 cm$
+
+    % \fillwithdottedlines{0.5in}
+    \begin{solution}
+      $\left[AB = 4 \sqrt{3} \right]$
+    \end{solution}
+    \vspace{15pt}
+    \begin{center}
+    \begin{tikzpicture}
+      % Disegna la griglia quadrettata
+      \draw[step=0.4cm, gray!30, very thin] (-10.0,-2.8) grid (7.2,2.8);
+
+      % Disegna la circonferenza
+      % \draw[thick] (0,0) circle (3cm);
+
+    \end{tikzpicture}
+  \end{center}
+
+\hrule
+\newpage
+  \subsubsection*{Risoluzione di Triangoli qualsiasi}
+  \vspace{10pt}
+
+  % --------------------------------- Esercizio 3
+  % \hrule width \hsize \kern 0.5mm \hrule width \hsize height 1pt
+  \hrule
+  \addpoints
+  \question[10]
+Risolvi il triangolo $A B C$, sapendo che: $b=4 \sqrt{2}, \quad c=4 \sqrt{6}, \quad \beta=30^{\circ}$.
+
+% \begin{center}
+%     \includegraphics[width=0.9\textwidth]{trig01.png} % Cambia "nome_immagine.png" con il nome del file
+% \end{center}
+\vspace{10pt}
+    \begin{tikzpicture}
+      % Disegna la griglia quadrettata
+      \draw[step=0.4cm, gray!30, very thin] (-10.0,-2.8) grid (7.2,2.8);
+
+      % Disegna la circonferenza
+      % \draw[thick] (0,0) circle (3cm);
+
+    \end{tikzpicture}
+% \fillwithdottedlines{0.5in}
+      \begin{solution}
+        Applichiamo più volte il teorema del coseno:
+$$
+\begin{aligned}
+& \cos \alpha=\frac{b^2+c^2-a^2}{2 b c}=\frac{17^2+20^2-12^2}{2 \cdot 17 \cdot 20} \simeq 0,80 \rightarrow \alpha \simeq 36,72^{\circ} ; \\
+& \cos \beta=\frac{a^2+c^2-b^2}{2 a c}=\frac{12^2+20^2-17^2}{2 \cdot 12 \cdot 20} \simeq 0,53 \rightarrow \beta \simeq 57,91^{\circ} ; \\
+& \cos \gamma=\frac{a^2+b^2-c^2}{2 a b}=\frac{12^2+17^2-20^2}{2 \cdot 12 \cdot 17} \simeq 0,08 \rightarrow \gamma \simeq 85,36^{\circ} .
+\end{aligned}
+$$
+      \end{solution}
+  % \newpage
+  \hrule
+
+  \vspace{10pt}
+  % ----------------------------------------Esercizio 5
+
+\addpoints
+  \question[4] Enuncia il Teorema del Coseno - o di Carnot - e fornisci la dimostrazione.
+
+\fillwithdottedlines{0.5in}
+    \begin{center}
+    \begin{tikzpicture}
+      % Disegna la griglia quadrettata
+      \draw[step=0.4cm, gray!30, very thin] (-10.0,-2.8) grid (7.2,2.8);
+
+    \end{tikzpicture}
+  \end{center}
+  \vspace{10pt}
+
+  \hrule
+  % \hrule width \hsize \kern 0.5mm \hrule width \hsize height 1pt
+
+  % ----------------------------------------Esercizio 5
+
+\addpoints
+\question[4] In un triangolo l'area misura $\dfrac{\sqrt{3}}{2}(1+ \sqrt{3})$ e due angoli hanno ampiezze $\dfrac{\pi}{4}$ e $\dfrac{\pi}{3}$.\\
+Determina le misure degli altri elementi del triangolo.
+% \fillwithdottedlines{0.75in}
+    \begin{center}
+    \begin{tikzpicture}
+      % Disegna la griglia quadrettata
+      \draw[step=0.4cm, gray!30, very thin] (-10.0,-2.8) grid (7.2,2.8);
+
+    \end{tikzpicture}
+  \end{center}
+  \vspace{10pt}
+  % \hrule width \hsize \kern 0.5mm \hrule width \hsize height 1pt
+  \newpage
+
+  % ----------------------------------------Esercizio 6
+
+  \hrule
+\addpoints
+\question[4] In un triangolo l'area misura $\dfrac{\sqrt{3}}{2}(1+ \sqrt{3})$ e due angoli hanno ampiezze $\dfrac{\pi}{4}$ e $\dfrac{\pi}{3}$.\\
+% \fillwithdottedlines{0.75in}
+    \begin{center}
+    \begin{tikzpicture}
+      % Disegna la griglia quadrettata
+      \draw[step=0.4cm, gray!30, very thin] (-10.0,-2.8) grid (7.2,2.8);
+
+    \end{tikzpicture}
+  \end{center}
+  \vspace{10pt}
+  % ========================================= Esercizio 6 - Facoltativo
+  \vfill
+  \rule[.1ex]{\textwidth}{0.3pt}
+  \bonusquestion[2] {\em Esercizio facoltativo:} Enuncia il Teorema del Coseno - o di Carnot - e fornisci la dimostrazione.
+
+  \vspace{10pt}
+    \begin{center}
+    \begin{tikzpicture}
+      % Disegna la griglia quadrettata
+      \draw[step=0.4cm, gray!30, very thin] (-10.0,-2.8) grid (7.2,2.8);
+
+    \end{tikzpicture}
+  \end{center}
+  \vspace{10pt}
+  \vspace{15pt}
+  % \hrule width \hsize \kern 0.5mm \hrule width \hsize height 1pt
+  % \hrule
+\end{questions}
+\newpage
+
+\vfill
+% ================================ Tabella Punteggi
+% \vfill
+\begin{center}
+  \subsubsection*{tabella dei punteggi}
+  \combinedgradetable[v][questions]
+
+  \footnotesize{la sufficienza è fissata a $20$ punti}
+
+  \subsubsection*{Conoscenze, abilità e competenze}
+
+  % Cambia font solo per la parte che segue
+  {\fontfamily{ptm}\selectfont  % ptm è il codice per Times New Roman
+    \footnotesize
+    \begin{tabular}{|c|c|c|c|}
+      \hline 
+    & \textbf{conoscenze} & \textbf{abilità} & \textbf{competenze} \\
+    \hline 
+      \textbf{eccellente} & 5 & 3 & 2 \\
+      \hline 
+      \textbf{ottimo} & 4.5 & 2.75 & 1.75 \\
+      \hline 
+      \textbf{buono} & 4 & 2.5 & 1.5 \\
+      \hline 
+      \textbf{discreto} & 3.5 & 2.25 & 1.25 \\
+      \hline 
+      \textbf{sufficiente} & 3 & 2 & 1 \\
+      \hline 
+      \textbf{quasi sufficiente} & 2.75 & 1.875 & 0.875 \\
+      \hline 
+      \textbf{insufficiente} & 2.5 & 1.75 & 0.75 \\
+      \hline 
+      \textbf{gravemente insufficiente} & 2 & 1.5 & 0.5 \\
+      \hline 
+      \textbf{scarso} & 1.5 & 1.25 & 0.25 \\
+      \hline
+    \end{tabular}
+    \vspace{2pt}
+
+    \footnotesize{$^{*}$Per gli indicatori e i descrittori si fa riferimento a quelli esplicitati nella programmazione.\\ 
+    ciascun valore espresso nella tabella va inteso come massimo dei punti attribuibili.}
+  }
+\end{center}
+\noindent
+
+% \hrule width \hsize \kern 0.5mm \hrule width \hsize height 1pt
+\begin{center}
+  \subsubsection*{Griglia di valutazione}
+\end{center}
+
+% \begin{multicols}{2}
+
+{\color{cinnabar}
+  \begin{center}
+    % \bf{Verifica}
+  \end{center}
+  \begin{center}
+    \begin{tabular}{c|c}
+      \toprule
+
+      \bf{punteggio} &  \bf{voto}\\[5pt]
+      \midrule
+      $ < 8$ & $3\frac{1}{2}$ \\[3pt]
+
+      $8$ & $4$ \\[3pt]
+
+      $10$ & $4\frac{1}{2}$ \\[3pt]
+
+      $14$ & $5$ \\[3pt]
+
+      $18$ & $5 \frac{1}{2}$ \\[3pt]
+
+      \large {$20$} & \large{$6$} \\[3pt]
+
+      $24$ & $6 \frac{1}{2}$ \\[3pt]
+
+      $26$ & $7$ \\[3pt]
+
+      $30$ & $7 \frac{1}{2}$ \\[3pt]
+
+      $32$ & $8$ \\[3pt]
+
+      $36$ & $8 \frac{1}{2}$ \\[3pt]
+
+      $38$ & $9$ \\[3pt]
+
+      $40$ & $9 \frac{1}{2}$ \\[3pt]
+
+      $40 - \text{\em bonus}$ & $10$ \\[5pt]
+
+      \bottomrule
+    \end{tabular}
+  \end{center}
+}
+
+% \newpage
+
+
+% \begin{tikzpicture}
+% Disegna la circonferenza
+% \draw[thick] (0,0) circle (2cm);
+
+% Disegna gli assi
+% \draw[->, thick] (-3.5,0) -- (3.5,0) node[anchor=north west] {$x$};
+% \draw[->, thick] (0,-3.5) -- (0,3.5) node[anchor=south east] {$y$};
+
+% Aggiungi i punti fondamentali
+% \filldraw[black] (3,0) circle (2pt) node[anchor=north] {1};
+% \filldraw[black] (-3,0) circle (2pt) node[anchor=north] {-1};
+% \filldraw[black] (0,3) circle (2pt) node[anchor=east] {1};
+% \filldraw[black] (0,-3) circle (2pt) node[anchor=west] {-1};
+
+% Aggiungi angoli principali
+% \draw[thick, ->] (0,0) -- (2.12,2.12) node[midway, anchor=south west] {$\frac{\pi}{4}$};
+% \draw[thick, ->] (0,0) -- (0,3) node[midway, anchor=west] {$\frac{\pi}{2}$};
+% \draw[thick, ->] (0,0) -- (-2.12,2.12) node[midway, anchor=south east] {$\frac{3\pi}{4}$};
+% \draw[thick, ->] (0,0) -- (-3,0) node[midway, anchor=north] {$\pi$};
+% \draw[thick, ->] (0,0) -- (-2.12,-2.12) node[midway, anchor=north east] {$\frac{5\pi}{4}$};
+% \draw[thick, ->] (0,0) -- (0,-3) node[midway, anchor=east] {$\frac{3\pi}{2}$};
+% \draw[thick, ->] (0,0) -- (2.12,-2.12) node[midway, anchor=north west] {$\frac{7\pi}{4}$};
+
+% Etichetta origine
+% \node at (0,0) [anchor=north east] {O};
+% \end{tikzpicture}
+\end{document}
+
+
