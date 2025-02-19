@@ -10,7 +10,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
+      { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -32,11 +32,7 @@ require("config.autocmds")
 require("lazy").setup({
   spec = {
     -- LazyVim and core plugins
-    { "LazyVim/LazyVim",                                    import = "lazyvim.plugins" },
-
-    -- Custom plugin imports
-    { import = "plugins" },
-    { import = "plugins.colorscheme" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
     -- LazyVim extras
     { import = "lazyvim.plugins.extras.lang.yaml" },
@@ -47,13 +43,17 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.coding.luasnip" },
+
+    -- Custom plugin imports
+    { import = "plugins" },
+    { import = "plugins.colorscheme" },
   },
 
   -- ╭──────────────────────────────────────────────────────────╮
   -- │ Defaults                                               │
   -- ╰──────────────────────────────────────────────────────────╯
   defaults = {
-    lazy = false,    -- Load custom plugins at startup
+    lazy = false, -- Load custom plugins at startup
     version = false, -- Always use the latest commit for plugins
   },
 
@@ -67,7 +67,7 @@ require("lazy").setup({
   -- ╰──────────────────────────────────────────────────────────╯
   checker = {
     enabled = true, -- Periodically check for updates
-    notify = true,  -- Show notifications on update
+    notify = true, -- Show notifications on update
   },
 
   -- ╭──────────────────────────────────────────────────────────╮

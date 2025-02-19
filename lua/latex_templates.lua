@@ -7,6 +7,7 @@ function M.choose_latex_template()
     "programmazione_tpl.tex",
     "beamer_lesson_tpl.tex",
     "trig_formule.tex",
+    "diario_chapter.tex",
   }
 
   vim.ui.select(templates, { prompt = "Select LaTeX Template:" }, function(choice)

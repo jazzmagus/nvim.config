@@ -16,3 +16,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     require("snacks").dashboard.open()
   end,
 })
+
+-- vim.keymap.set("n", "<leader>mr", function()
+--   vim.cmd("!bash /Users/diego/gingerdrops/convert.sh")
+-- end, { desc = "Compila con pdfLaTeX" })

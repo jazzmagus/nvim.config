@@ -22,3 +22,6 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 --   ":lua require'telescope'.extensions.project.project{}<CR>",
 --   { noremap = true, silent = true }
 -- )
+vim.keymap.set("n", "<leader>mr", function()
+  vim.cmd("!./convert.sh")
+end, { desc = "Compila con pdfLaTeX" })
