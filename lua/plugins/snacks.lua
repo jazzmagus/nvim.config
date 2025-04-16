@@ -171,7 +171,7 @@ return {
       },
     },
 
-    -- Configurazione Immagini
+    -- Configurazione Formato Immagini
     image = {
       formats = { "png", "jpg", "jpeg", "gif", "webp", "pdf" },
       doc = {
