@@ -28,7 +28,7 @@ return {
     },
     -- Nuova sezione per gli allegati
     attachments = {
-      img_folder = "50_Allegati/images",
+      img_folder = "50_Allegati",
       img_text_func = function(_, path)
         -- 1. Validazione robusta del percorso
         if not path or type(path) ~= "string" or path == "" then
