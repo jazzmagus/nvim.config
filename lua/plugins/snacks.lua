@@ -14,7 +14,7 @@
 return {
   {
     "folke/snacks.nvim",
-    event = "VeryLazy", -- Disabilita l'auto-start
+    -- event = "VeryLazy", -- Disabilita l'auto-start
     keys = {
       -- Open git log in vertical view
       {
@@ -267,6 +267,7 @@ return {
       -- https://github.com/LazyVim/LazyVim/discussions/4251#discussioncomment-11198069
       -- Here's the lazygit snak docs
       -- https://github.com/folke/snacks.nvim/blob/main/docs/lazygit.md
+
       lazygit = {
         theme = {
           selectedLineBgColor = { bg = "CursorLine" },
@@ -285,6 +286,10 @@ return {
           width = 0,
           height = 0,
         },
+        setup = function()
+          vim.env.GIT_SSH_COMMAND = "ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes"
+          vim.env.SSH_AUTH_SOCK = vim.fn.expand("$SSH_AUTH_SOCK") or ""
+        end,
       },
       notifier = {
         enabled = true,

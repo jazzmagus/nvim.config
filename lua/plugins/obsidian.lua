@@ -26,7 +26,8 @@ return {
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
     },
-    -- Nuova sezione per gli allegati
+    --
+    -- Nuova sezione per gli allegati, immagini comprese
     attachments = {
       img_folder = "50_Allegati",
       img_text_func = function(_, path)
