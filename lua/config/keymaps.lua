@@ -22,6 +22,10 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 --   ":lua require'telescope'.extensions.project.project{}<CR>",
 --   { noremap = true, silent = true }
 -- )
-vim.keymap.set("n", "<leader>mr", function()
-  vim.cmd("!./convert.sh")
-end, { desc = "Compila con pdfLaTeX" })
+-- vim.keymap.set("n", "<leader>mr", function()
+--   vim.cmd("!./convert.sh")
+-- end, { desc = "Compila con pdfLaTeX" })
+
+-- File: ~/.config/nvim/lua/keymaps.lua (o dov'è il tuo file keymaps.lua)
+local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }

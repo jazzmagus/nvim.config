@@ -32,6 +32,24 @@ return {
           -- fallbacks = { "snippets", "buffer" },
           score_offset = 90, -- the higher the number, the higher the priority
         },
+        path = {
+          name = "Path",
+          module = "blink.cmp.sources.path",
+          score_offset = 25,
+          -- When typing a path, I would get snippets and text in the
+          -- suggestions, I want those to show only if there are no path
+          -- suggestions
+          fallbacks = { "snippets", "buffer" },
+          -- min_keyword_length = 2,
+          opts = {
+            trailing_slash = false,
+            label_trailing_slash = true,
+            get_cwd = function(context)
+              return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
+            end,
+            show_hidden_files_by_default = true,
+          },
+        },
         buffer = {
           name = "Buffer",
           enabled = true,
@@ -43,7 +61,7 @@ return {
         emoji = {
           module = "blink-emoji",
           name = "Emoji",
-          score_offset = 15,        -- Tune by preference
+          score_offset = 15, -- Tune by preference
           opts = { insert = true }, -- Insert emoji (default) or complete its name
         },
       },

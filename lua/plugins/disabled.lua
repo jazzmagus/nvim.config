@@ -3,7 +3,7 @@ return {
   -- Disabilita obsidian.nvim
   {
     "epwalsh/obsidian.nvim",
-    enabled = false,
+    enabled = true,
   },
   -- Aggiungi altri plugin da disabilitare
   {
@@ -16,6 +16,10 @@ return {
   },
   {
     "bullets-vim/bullets.vim",
+    enabled = true,
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
     enabled = false,
   },
   {
@@ -31,8 +35,12 @@ return {
     enabled = false,
   },
   {
-    "OXY2DEV/markview.nvim",
+    "arnamak/stay-centered.nvim",
     enabled = false,
+  },
+  {
+    "OXY2DEV/markview.nvim",
+    enabled = true,
   },
   {
     "zbirenbaum/copilot.nvim",

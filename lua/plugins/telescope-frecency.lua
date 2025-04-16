@@ -22,6 +22,7 @@ the file itself, only from DB.
 
 return {
   "nvim-telescope/telescope-frecency.nvim",
+  enabled = false,
   config = function()
     require("telescope").setup({
       extensions = {
@@ -33,9 +34,9 @@ return {
           --
           -- This fixes an issue I had in which I couldn't close the floating
           -- window because I couldn't focus it
-          db_safe_mode = false,       -- Default: true
+          db_safe_mode = false, -- Default: true
           -- If `true`, it removes stale entries count over than db_validate_threshold
-          auto_validate = true,       -- Default: true
+          auto_validate = true, -- Default: true
           -- It will remove entries when stale ones exist more than this count
           db_validate_threshold = 10, -- Default: 10
           -- Show the path of the active filter before file paths.
