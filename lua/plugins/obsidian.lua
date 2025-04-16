@@ -43,7 +43,7 @@ return {
 
         -- 3. Generazione percorso univoco
         local unique_name = os.date("%Y%m%d%H%M%S") .. "_" .. filename
-        local relative_path = "50_Allegati/images" .. unique_name
+        local relative_path = "50_Allegati" .. unique_name
 
         -- 4. Formattazione del link
         return string.format("![%s](%s)", filename, relative_path)
