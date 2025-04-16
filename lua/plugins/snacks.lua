@@ -286,10 +286,10 @@ return {
           width = 0,
           height = 0,
         },
-        setup = function()
-          vim.env.GIT_SSH_COMMAND = "ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes"
-          vim.env.SSH_AUTH_SOCK = vim.fn.expand("$SSH_AUTH_SOCK") or ""
-        end,
+
+        --   vim.env.GIT_SSH_COMMAND = "ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes"
+        --   vim.env.SSH_AUTH_SOCK = vim.fn.expand("$SSH_AUTH_SOCK") or ""
+        -- end,
       },
       notifier = {
         enabled = true,

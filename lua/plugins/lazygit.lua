@@ -1,14 +1,14 @@
 return {
   "kdheepak/lazygit.nvim",
-  enabled = false,
-  lazy = true, -- Caricamento lazy (non si apre da solo)
+  lazy = false,
+  -- enabled = false,  <-- Rimuovi o imposta a true
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "folke/snacks.nvim", -- Dipendenza esplicita
   },
   config = function()
-    -- Solo configurazione SSH (NON impostare vim.g.lazygit_...)
-    vim.env.GIT_SSH_COMMAND = "ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes"
-    vim.env.SSH_AUTH_SOCK = vim.fn.expand("$SSH_AUTH_SOCK") or ""
+    vim.g.lazygit_floating_window_scaling_factor = 1.0
+    -- Aggiungi queste variabili d'ambiente
+    vim.env.GIT_SSH_COMMAND = "ssh -i ~/.ssh/id_rsa" -- Percorso alla tua chiave privata
+    vim.env.SSH_AUTH_SOCK = vim.fn.expand("$SSH_AUTH_SOCK")
   end,
 }
